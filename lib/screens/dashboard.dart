@@ -117,74 +117,78 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
+  final flutterLogo = FlutterLogo();
   Widget options() {
     return Container(
       padding: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 50),
-          Text('COVID-19 TRACKER', style: kHeadingTextStyle),
-          SizedBox(height: 20),
-          Text('build: v0.6.5 Beta'),
-          SizedBox(height: 20),
-          Text(
-            'Under Development\nThanks for testing!',
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 20),
-          Text('Designed and Developed by: \nMadhav Tripathi',
-              textAlign: TextAlign.center),
-          SizedBox(height: 20),
-          SizedBox(height: 20),
-          Text('Select Map Provider :', style: kHeadingTextStyle),
-          SizedBox(height: 20),
-          ListTile(
-              title: Text('Bing', style: kHeadingTextStyle),
-              subtitle:
-                  Text('https://www.bing.com/covid', style: kUrlTextStyle),
-              leading: Image.asset(
-                'assets/images/bing.png',
-                height: 50,
-                width: 50,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              trailing: Icon(
-                index == 0 ? Icons.check_box : Icons.check_box_outline_blank,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              onTap: () => setState(() => index = 0)),
-          ListTile(
-              leading: Image.asset(
-                'assets/images/here.png',
-                height: 50,
-                width: 50,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              title: Text('Here', style: kHeadingTextStyle),
-              subtitle: Text('https://app.developer.here.com/coronavirus/',
-                  style: kUrlTextStyle),
-              trailing: Icon(
-                index == 1 ? Icons.check_box : Icons.check_box_outline_blank,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              onTap: () => setState(() => index = 1)),
-          ListTile(
-              leading: Image.asset(
-                'assets/images/who.png',
-                height: 50,
-                width: 50,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              title: Text('WHO', style: kHeadingTextStyle),
-              subtitle: Text('https://experience.arcgis.com/experience',
-                  style: kUrlTextStyle),
-              trailing: Icon(
-                index == 2 ? Icons.check_box : Icons.check_box_outline_blank,
-                color: isLight ? Colors.black : Colors.white,
-              ),
-              onTap: () => setState(() => index = 2)),
-          SizedBox(height: 20),
-        ],
+      child: SingleChildScrollView(
+              child: Column(
+          children: <Widget>[
+            SizedBox(height: 50),
+            Text('COVID-19 TRACKER', style: kHeadingTextStyle),
+            SizedBox(height: 20),
+            Text('build: v0.6.5 Beta'),
+            SizedBox(height: 20),
+            Text(
+              'Under Development\nThanks for testing!',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
+                'Designed and Developed\n with ❤  by: \nMadhav Tripathi',
+                textAlign: TextAlign.center),
+            SizedBox(height: 20),
+            SizedBox(height: 20),
+            Text('Select Map Provider :', style: kHeadingTextStyle),
+            SizedBox(height: 20),
+            ListTile(
+                title: Text('Bing', style: kHeadingTextStyle),
+                subtitle:
+                    Text('https://www.bing.com/covid', style: kUrlTextStyle),
+                leading: Image.asset(
+                  'assets/images/bing.png',
+                  height: 50,
+                  width: 50,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                trailing: Icon(
+                  index == 0 ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                onTap: () => setState(() => index = 0)),
+            ListTile(
+                leading: Image.asset(
+                  'assets/images/here.png',
+                  height: 50,
+                  width: 50,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                title: Text('Here', style: kHeadingTextStyle),
+                subtitle: Text('https://app.developer.here.com/coronavirus/',
+                    style: kUrlTextStyle),
+                trailing: Icon(
+                  index == 1 ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                onTap: () => setState(() => index = 1)),
+            ListTile(
+                leading: Image.asset(
+                  'assets/images/who.png',
+                  height: 50,
+                  width: 50,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                title: Text('WHO', style: kHeadingTextStyle),
+                subtitle: Text('https://experience.arcgis.com/experience',
+                    style: kUrlTextStyle),
+                trailing: Icon(
+                  index == 2 ? Icons.check_box : Icons.check_box_outline_blank,
+                  color: isLight ? Colors.black : Colors.white,
+                ),
+                onTap: () => setState(() => index = 2)),
+            SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
