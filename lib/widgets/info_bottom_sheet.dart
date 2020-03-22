@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:covid_19_tracker/widgets/source_list_item.dart';
+
+import '../widgets/source_list_item.dart';
 
 class InfoBottomSheet extends StatelessWidget {
   @override

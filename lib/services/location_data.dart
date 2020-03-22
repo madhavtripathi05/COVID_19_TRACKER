@@ -7,6 +7,7 @@ class LocationData {
 
   Future<void> getLocationData() async {
     try {
+      // requesting location
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       latitude = position.latitude;
@@ -15,7 +16,7 @@ class LocationData {
           await Geolocator().placemarkFromCoordinates(latitude, longitude);
 
       country = placemark[0].country;
-      
+      // Many More to do, Contribution required
       country == 'United States' ? country = 'USA' : country = country;
       country == 'United Kingdom' ? country = 'UK' : country = country;
       print(country);

@@ -15,9 +15,10 @@ class Scraper {
     List<String> data = [];
     String element = '';
 
-    var table = document.querySelector('tbody');
+    var table = document.querySelectorAll('tbody');
 
-    var rows = table.querySelectorAll('tr');
+    //as there are two tables on the website
+    var rows = table.elementAt(1).querySelectorAll('tr');
 
     for (var row in rows) {
       var cols = row.querySelectorAll('td');
@@ -26,14 +27,12 @@ class Scraper {
         element = col.text;
         element = element.replaceAll('\n', '');
         element = element.replaceAll('\t', '');
-        element = element.replaceAll(' ', '');
         data.add(element);
       }
     }
 
     // print(data.toString() + ' ended List');
 
-    // List<Element> links = document.querySelectorAll('.table>tbody>tr>td');
     List<Map<String, dynamic>> dataMap = [];
 
     for (var i = 0; i < (data.length - 6);) {
@@ -53,8 +52,7 @@ class Scraper {
   }
 }
 
-//for testing
-// void main() async {
-// var scraper =  Scraper();
-//   print(await Scraper().initiate());
-// }
+// for testing
+void main() async {
+  print(await Scraper().initiate());
+}

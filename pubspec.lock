@@ -36,6 +36,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  charts_common:
+    dependency: transitive
+    description:
+      name: charts_common
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.0"
+  charts_flutter:
+    dependency: "direct main"
+    description:
+      name: charts_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.0"
   collection:
     dependency: transitive
     description:
@@ -85,25 +99,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
-  flappy_search_bar:
-    dependency: "direct main"
-    description:
-      name: flappy_search_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.2"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_here_maps:
-    dependency: "direct main"
-    description:
-      name: flutter_here_maps
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -118,13 +118,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.2"
-  flutter_staggered_grid_view:
-    dependency: transitive
-    description:
-      name: flutter_staggered_grid_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -198,6 +191,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.4"
   matcher:
     dependency: transitive
     description:
@@ -308,20 +308,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  syncfusion_flutter_charts:
-    dependency: "direct main"
-    description:
-      name: syncfusion_flutter_charts
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "17.4.51"
-  syncfusion_flutter_core:
-    dependency: transitive
-    description:
-      name: syncfusion_flutter_core
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "17.4.51"
   term_glyph:
     dependency: transitive
     description:
@@ -371,13 +357,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+1"
-  utf:
-    dependency: transitive
-    description:
-      name: utf
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.0+5"
   vector_math:
     dependency: transitive
     description:

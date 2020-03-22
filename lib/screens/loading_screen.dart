@@ -1,12 +1,12 @@
-import 'package:covid_19_tracker/constants/constants.dart';
-import 'package:covid_19_tracker/services/scraper.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-import 'package:covid_19_tracker/services/api_data.dart';
-import 'package:covid_19_tracker/screens/dashboard.dart';
+import '../constants/constants.dart';
+import '../services/scraper.dart';
+import '../services/api_data.dart';
+import '../screens/dashboard.dart';
 
 class LoadingScreen extends StatefulWidget {
   static const routeName = '/loading';

@@ -1,8 +1,9 @@
-import 'package:covid_19_tracker/screens/charts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-// import 'dashboard.dart';
+import '../screens/charts_screen.dart';
+
+
 
 class MapsScreen extends StatefulWidget {
   static const routeName = '/maps_screen';
@@ -38,6 +39,7 @@ class _MapsScreenState extends State<MapsScreen> {
           ),
         ],
       ),
+      //show Map according to the selection from endDrawer
       url: urls[widget.index],
       withZoom: true,
       withLocalStorage: true,

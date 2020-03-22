@@ -1,7 +1,8 @@
-import 'package:covid_19_tracker/constants/constants.dart';
-import 'package:covid_19_tracker/models/country_virus_data.dart';
-import 'package:covid_19_tracker/widgets/data_list_item.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/constants.dart';
+import '../models/country_virus_data.dart';
+import '../widgets/data_list_item.dart';
 
 class CountriesInfoScreen extends StatefulWidget {
   static const routeName = '/countries-info-screen';

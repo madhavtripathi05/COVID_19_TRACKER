@@ -1,7 +1,8 @@
-import 'package:covid_19_tracker/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+
+import '../constants/constants.dart';
 
 class InfoScreen extends StatefulWidget {
   static const routeName = '/info-screen';

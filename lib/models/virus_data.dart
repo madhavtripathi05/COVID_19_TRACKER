@@ -1,5 +1,3 @@
-
-
 class VirusData {
   int confirmedCases=0;
   int deaths=0;

@@ -7,7 +7,6 @@ class SourceListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data,
-      // style: TextStyle(color: Colors.greenAccent),
       textAlign: TextAlign.center,
     );
   }

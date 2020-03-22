@@ -16,6 +16,7 @@ class StatesInfoScreen extends StatefulWidget {
 
 class _StatesInfoScreenState extends State<StatesInfoScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     updateStatesUI(widget.stateVirusData);
@@ -165,60 +166,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
           ],
         ),
       ),
-      //not working :(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => showSearch(context: context, delegate: StateSearch()),
-      //   child: Icon(Icons.search),
-      // ),
+      
     );
   }
 }
-
-// class StateSearch extends SearchDelegate<String> {
-//   @override
-//   List<Widget> buildActions(BuildContext context) {
-//     return [IconButton(icon: Icon(Icons.clear), onPressed: () => query = '')];
-//   }
-
-//   @override
-//   Widget buildLeading(BuildContext context) {
-//     return IconButton(
-//       icon: AnimatedIcon(
-//         icon: AnimatedIcons.menu_arrow,
-//         progress: transitionAnimation,
-//       ),
-//       onPressed: () => close(context, null),
-//     );
-//   }
-
-//   @override
-//   Widget buildResults(BuildContext context) {
-//     return Text(query);
-//   }
-
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     List<String> finalList = query.isEmpty
-//         ? suggestedStatesName
-//         : statesName.where((p) => p.contains(query)).toList();
-//     return ListView.builder(
-//       itemBuilder: (context, index) => ListTile(
-//         contentPadding: EdgeInsets.all(10),
-//         onTap: () => showResults(context),
-//         leading: Image.asset('assets/images/india.png'),
-//         title: RichText(
-//           text: TextSpan(
-//               text: finalList[index].substring(0, query.length),
-//               children: [
-//                 TextSpan(
-//                     text: finalList[index].substring(query.length),
-//                     style: TextStyle(color: Colors.grey))
-//               ],
-//               style:
-//                   TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-//         ),
-//       ),
-//       itemCount: finalList.length,
-//     );
-//   }
-// }

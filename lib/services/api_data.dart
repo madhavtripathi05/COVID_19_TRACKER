@@ -1,5 +1,5 @@
-import 'package:covid_19_tracker/services/location_data.dart';
-import 'package:covid_19_tracker/services/network_api.dart';
+import '../services/location_data.dart';
+import '../services/network_api.dart';
 
 class ApiData {
   Future<dynamic> getVirusData() async {

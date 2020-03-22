@@ -1,3 +1,4 @@
+import 'package:covid_19_tracker/screens/charts_screen.dart';
 import 'package:covid_19_tracker/screens/countries_info_screen.dart';
 import 'package:covid_19_tracker/screens/states_info_screen.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -122,7 +123,7 @@ class _DashboardState extends State<Dashboard> {
     return Container(
       padding: EdgeInsets.all(10),
       child: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: <Widget>[
             SizedBox(height: 50),
             Text('COVID-19 TRACKER', style: kHeadingTextStyle),
@@ -134,8 +135,7 @@ class _DashboardState extends State<Dashboard> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
-            Text(
-                'Designed and Developed\n with ❤  by: \nMadhav Tripathi',
+            Text('Designed and Developed\n with ❤  by: \nMadhav Tripathi',
                 textAlign: TextAlign.center),
             SizedBox(height: 20),
             SizedBox(height: 20),
@@ -400,32 +400,52 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
 
-              FlatButton(
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  isLight
-                      ? Icon(Icons.wb_incandescent, color: Colors.black)
-                      : Icon(Icons.lightbulb_outline),
-                  Text(isLight ? ' Dark Theme' : ' Light Theme'),
-                ]),
-                onPressed: () => setState(
-                  () {
-                    if (isLight) {
-                      // brightness = Brightness.dark;
-                      isLight = !isLight;
-                      DynamicTheme.of(context).setBrightness(Brightness.dark);
-                    } else if (!isLight) {
-                      isLight = !isLight;
-                      // brightness = Brightness.light;
-                      DynamicTheme.of(context).setBrightness(Brightness.light);
-                    } else {
-                      isLight =
-                          DynamicThemeState().brightness == Brightness.light;
-                      // brightness = Brightness.dark;
-                      DynamicTheme.of(context).setBrightness(Brightness.dark);
-                    }
-                  },
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  FlatButton(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          isLight
+                              ? Icon(Icons.wb_incandescent, color: Colors.black)
+                              : Icon(Icons.lightbulb_outline),
+                          Text(isLight ? ' Dark Theme' : ' Light Theme'),
+                        ]),
+                    onPressed: () => setState(
+                      () {
+                        if (isLight) {
+                          // brightness = Brightness.dark;
+                          isLight = !isLight;
+                          DynamicTheme.of(context)
+                              .setBrightness(Brightness.dark);
+                        } else if (!isLight) {
+                          isLight = !isLight;
+                          // brightness = Brightness.light;
+                          DynamicTheme.of(context)
+                              .setBrightness(Brightness.light);
+                        } else {
+                          isLight = DynamicThemeState().brightness ==
+                              Brightness.light;
+                          // brightness = Brightness.dark;
+                          DynamicTheme.of(context)
+                              .setBrightness(Brightness.dark);
+                        }
+                      },
+                    ),
+                  ),
+                  FlatButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.show_chart),
+                        Text(' Charts & Graphs'),
+                      ],
+                    ),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, ChartsScreen.routeName),
+                  ),
+                ],
               ),
               // Expanded(child: buildList()),
             ],
