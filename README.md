@@ -12,9 +12,11 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(12).png" />
 </span>
 
+&nbsp;
+
 ![covid19tracker](https://img.shields.io/badge/COVID__19__TRACKER-v0.6.5(Beta)-blue)
 
-# Download APK from [here](https://drive.google.com/open?id=1Se-rzlLuK5JqbBZyWuyEQvEwfNeMFTGZ)
+# Download APK from [Here](https://drive.google.com/open?id=1D3r1BxY0xSfatteFiJBsWgjaK5rS9h97)
 
 ## Features
 * __Live data__ : Get live data from [worldinfometers](https://www.worldometers.info/coronavirus/)
@@ -55,3 +57,5 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(24).png" />
 </details>
 
+### API used:
+[NovelCOVID/API](https://github.com/NovelCOVID/API)
