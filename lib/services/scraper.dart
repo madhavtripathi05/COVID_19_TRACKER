@@ -18,7 +18,7 @@ class Scraper {
     var table = document.querySelectorAll('tbody');
 
     //as there are two tables on the website
-    var rows = table.elementAt(1).querySelectorAll('tr');
+    var rows = table.elementAt(table.length-1).querySelectorAll('tr');
 
     for (var row in rows) {
       var cols = row.querySelectorAll('td');
@@ -54,5 +54,5 @@ class Scraper {
 
 // for testing
 void main() async {
-  print(await Scraper().initiate());
+  await Scraper().initiate();
 }
