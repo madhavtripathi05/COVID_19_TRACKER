@@ -13,7 +13,7 @@ class LocationData {
       latitude = position.latitude;
       longitude = position.longitude;
       List<Placemark> placemark =
-          await Geolocator().placemarkFromCoordinates(latitude, longitude);
+          await Geolocator().placemarkFromCoordinates(latitude, longitude,localeIdentifier: 'en_US');
 
       country = placemark[0].country;
       // Many More to do, Contribution required
