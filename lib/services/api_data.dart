@@ -1,3 +1,4 @@
+
 import '../services/location_data.dart';
 import '../services/network_api.dart';
 
@@ -30,4 +31,15 @@ class ApiData {
     print(countriesVirusData.toString());
     return countriesVirusData;
   }
+
+  Future<dynamic> getIndiaHistoricalData() async {
+    //fetching data from API
+    NetworkAPI networkAPI =
+        NetworkAPI('https://corona.lmao.ninja/historical/india');
+    var indiaHistoricalData = networkAPI.getData();
+    print(indiaHistoricalData.toString());
+    // var jsonEncode = json.encode(indiaHistoricalData);
+    return indiaHistoricalData;
+  }
 }
+

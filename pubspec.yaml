@@ -27,6 +27,7 @@ dependencies:
   dynamic_theme: ^1.0.1
   flutter_spinkit: ^4.1.2
   flutter_webview_plugin: ^0.3.10+1
+  font_awesome_flutter: ^8.7.0
   geolocator: ^5.3.0
   html:
   http:  

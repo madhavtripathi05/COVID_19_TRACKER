@@ -16,8 +16,8 @@ class CountriesInfoScreen extends StatefulWidget {
 class CountriesInfoScreenState extends State<CountriesInfoScreen> {
   CountryVirusData locationData;
   List<CountryVirusData> countriesData = [];
-  List<CountryVirusData> countriesForDisplay = [];
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+    List<CountryVirusData> countriesForDisplay = [];
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -133,7 +133,6 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: AppBar(title: Text('All Countries'), centerTitle: true),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

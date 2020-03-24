@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
           title: 'COVID-19 Tracker',
           debugShowCheckedModeBanner: false,
           theme: theme,
+          //  don't forget to uncomment the following line.
           home: LoadingScreen(),
+          // home: ChartsScreen(),
           routes: {
             ChartsScreen.routeName: (context) => ChartsScreen(),
             CountriesInfoScreen.routeName: (context) => CountriesInfoScreen(),
