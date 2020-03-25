@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 import '../models/country_virus_data.dart';
 import '../widgets/data_list_item.dart';
+import '../screens/charts_screen.dart';
 
 class CountriesInfoScreen extends StatefulWidget {
   static const routeName = '/countries-info-screen';
@@ -16,8 +17,8 @@ class CountriesInfoScreen extends StatefulWidget {
 class CountriesInfoScreenState extends State<CountriesInfoScreen> {
   CountryVirusData locationData;
   List<CountryVirusData> countriesData = [];
-    List<CountryVirusData> countriesForDisplay = [];
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<CountryVirusData> countriesForDisplay = [];
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -91,39 +92,52 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
     );
   }
 
-  Card buildCard(int index) {
-    return Card(
-      elevation: 7,
-      margin: EdgeInsets.all(10),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            DataListItem(
-                '${index + 1}.  ${countriesForDisplay[index].country}  ',
-                true,
-                Colors.deepOrangeAccent),
-            DataListItem(
-                'Confirmed: ${countriesForDisplay[index].confirmedCases}',
-                false,
-                Colors.amber),
-            DataListItem('Recovered: ${countriesForDisplay[index].recovered}',
-                false, Colors.green),
-            DataListItem('Deaths: ${countriesForDisplay[index].deaths}', false,
-                Colors.red),
-            DataListItem(
-                'Critical Cases ${countriesForDisplay[index].criticalCases}',
-                false,
-                Colors.teal),
-            DataListItem(
-                'Today\'s Cases: ${countriesForDisplay[index].todayCases}',
-                false,
-                Colors.lightBlueAccent),
-            DataListItem(
-                'Today\'s Deaths: ${countriesForDisplay[index].todayDeaths}',
-                false,
-                Colors.redAccent),
-          ],
+  Widget buildCard(int index) {
+    return InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChartsScreen(
+            countryName: '${countriesForDisplay[index].country}',
+            cases: double.parse('${countriesForDisplay[index].confirmedCases}'),
+            deaths: double.parse('${countriesForDisplay[index].deaths}'),
+            recovered: double.parse('${countriesForDisplay[index].recovered}'),
+          ),
+        ),
+      ),
+      child: Card(
+        elevation: 7,
+        margin: EdgeInsets.all(10),
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: <Widget>[
+              DataListItem(
+                  '${index + 1}.  ${countriesForDisplay[index].country}  ',
+                  true,
+                  Colors.deepOrangeAccent),
+              DataListItem(
+                  'Confirmed: ${countriesForDisplay[index].confirmedCases}',
+                  false,
+                  Colors.amber),
+              DataListItem('Recovered: ${countriesForDisplay[index].recovered}',
+                  false, Colors.green),
+              DataListItem('Deaths: ${countriesForDisplay[index].deaths}',
+                  false, Colors.red),
+              DataListItem(
+                  'Critical Cases: ${countriesForDisplay[index].criticalCases}',
+                  false,
+                  Colors.teal),
+              DataListItem(
+                  'Today\'s Cases: ${countriesForDisplay[index].todayCases}',
+                  false,
+                  Colors.lightBlueAccent),
+              DataListItem(
+                  'Today\'s Deaths: ${countriesForDisplay[index].todayDeaths}',
+                  false,
+                  Colors.redAccent),
+            ],
+          ),
         ),
       ),
     );
@@ -165,8 +179,6 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
                 ),
               ],
             ),
-            // SizedBox(height: 50),
-
             buildList(),
           ],
         ),

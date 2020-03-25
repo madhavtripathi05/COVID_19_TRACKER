@@ -213,14 +213,13 @@ class _DashboardState extends State<Dashboard> {
               ),
               SizedBox(height: 20),
               InkWell(
-                onTap: () => locationData.country == 'India'
-                    ? Navigator.push(context,
+                onTap: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                         return CountriesInfoScreen(
                           countryVirusData: widget.countriesData,
                         );
                       }))
-                    : null,
+                   ,
                 child: Hero(
                   tag: 'Countries',
                   child: Card(
@@ -439,11 +438,20 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(Icons.show_chart),
-                        Text(' Charts & Graphs'),
+                        Text(' InfoGraphs'),
                       ],
                     ),
-                    onPressed: () =>
-                        Navigator.pushNamed(context, ChartsScreen.routeName),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChartsScreen(
+                          countryName: locationData.country,
+                          cases: double.parse('${locationData.confirmedCases}'),
+                          deaths: double.parse('${locationData.deaths}'),
+                          recovered: double.parse('${locationData.recovered}'),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -32,10 +32,10 @@ class ApiData {
     return countriesVirusData;
   }
 
-  Future<dynamic> getIndiaHistoricalData() async {
+  Future<dynamic> getCountryHistoricalData(String country) async {
     //fetching data from API
     NetworkAPI networkAPI =
-        NetworkAPI('https://corona.lmao.ninja/historical/india');
+        NetworkAPI('https://corona.lmao.ninja/v2/historical/$country');
     var indiaHistoricalData = networkAPI.getData();
     print(indiaHistoricalData.toString());
     // var jsonEncode = json.encode(indiaHistoricalData);

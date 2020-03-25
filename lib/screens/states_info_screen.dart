@@ -40,7 +40,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
                 true,
                 Colors.deepOrangeAccent),
             DataListItem(
-                'Confirmed(Indians):${statesForDisplay[index].confirmedCases}',
+                'Confirmed(Indians): ${statesForDisplay[index].confirmedCases}',
                 false,
                 Colors.amber),
             DataListItem(

@@ -19,14 +19,14 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 # Download APK from [Here](https://drive.google.com/open?id=13Xr3mec8g-772IfGN9sE5MhaylbQeshO)
 
 ## Features
-* __Live data__ : Get live data from [worldinfometers](https://www.worldometers.info/coronavirus/)
+* __Live data__ : Get live data from [worldometers.info](https://www.worldometers.info/coronavirus/)
 * __Live Maps__ : Get a Webview of Here Maps, Bing, WHO (select one from end Drawer).
 * __Indian States__ : Get live data from [MOHFW](https://www.mohfw.gov.in/)
 * __Call Helpline__ : Directly call helpline for CoronaVirus (India only).
 * __Search__ : Added Search Option for ease of use.
-* __Dark Theme__ : Dark Theme to use it during night times.
+* __Dark Theme__ : Dark Theme to use during night.
 * __Informative Videos__ : Informative Videos from WHO's official YouTube Channel.
-* __Charts and InfoGraphs__ : Implementation pending.
+* __Charts and InfoGraphs__ : Get InfoGraphs for your Country.
 
 
 <details>

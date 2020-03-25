@@ -17,9 +17,11 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   void initState() {
-    _controller1 =
-        VideoPlayerController.asset("assets/videos/whatiscorona.mp4");
-    _controller1.initialize().then((_) => setState(() {}));
+    //reducing 7Mb
+    // _controller1 =
+    //     VideoPlayerController.asset("assets/videos/whatiscorona.mp4");
+
+    // _controller1.initialize().then((_) => setState(() {}));
 
     _controller2 = VideoPlayerController.asset("assets/videos/whatandhow.mkv");
     _controller2.initialize().then((_) => setState(() {}));
@@ -29,7 +31,7 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   void dispose() {
-    _controller1.dispose();
+    // _controller1.dispose();
     _controller2.dispose();
     super.dispose();
   }
@@ -61,7 +63,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     onPressed: () => _scaffoldKey.currentState.showSnackBar(
                       SnackBar(
                         action: SnackBarAction(
-                          textColor: Colors.greenAccent,
+                            textColor: Colors.greenAccent,
                             label: 'Open Website',
                             onPressed: () => launch(
                                 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019')),
@@ -75,9 +77,9 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text('What is Corona Virus ?', style: kHeadingTextStyle),
-              playVideo(_controller1),
+              // SizedBox(height: 20),
+              // Text('What is Corona Virus ?', style: kHeadingTextStyle),
+              // playVideo(_controller1),
               SizedBox(height: 20),
               Text('How to Protect Yourself ?', style: kHeadingTextStyle),
               playVideo(_controller2),
