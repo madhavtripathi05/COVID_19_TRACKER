@@ -61,6 +61,7 @@ flutter:
   assets:
    - assets/images/
    - assets/videos/whatandhow.mkv
+   - assets/info/info.txt
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -36,13 +36,14 @@ class _DashboardState extends State<Dashboard> {
   CountryVirusData locationData;
   int index = 0;
   List<CountryVirusData> countriesData = [];
-  // var brightness = DynamicThemeState().brightness;//redundant
-  bool isLight = DynamicThemeState().brightness == Brightness.light;
+  bool isLight;
+  
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     updateUI(widget.virusData);
+
     updateLocationUI(widget.locationVirusData);
     updateCountriesUI(widget.countriesData);
     super.initState();
@@ -60,9 +61,9 @@ class _DashboardState extends State<Dashboard> {
       }
 
       data = VirusData(
-        confirmedCases: virusData['cases'] ?? 0,
-        recovered: virusData['recovered'] ?? 0,
-        deaths: virusData['deaths'] ?? 0,
+        confirmedCases: virusData['cases'],
+        recovered: virusData['recovered'],
+        deaths: virusData['deaths'],
       );
     });
   }
@@ -81,13 +82,14 @@ class _DashboardState extends State<Dashboard> {
       }
       for (var eachData in virusData) {
         final countryData = CountryVirusData(
-          country: eachData['country'] ?? 'None',
-          confirmedCases: eachData['cases'] ?? 0,
-          recovered: eachData['recovered'] ?? 0,
-          deaths: eachData['deaths'] ?? 0,
-          todayCases: eachData['todayCases'] ?? 0,
-          criticalCases: eachData['critical'] ?? 0,
-          todayDeaths: eachData['todayDeaths'] ?? 0,
+          country: eachData['country'],
+          confirmedCases: eachData['cases'],
+          recovered: eachData['recovered'],
+          deaths: eachData['deaths'],
+          todayCases: eachData['todayCases'],
+          criticalCases: eachData['critical'],
+          todayDeaths: eachData['todayDeaths'],
+          flagUrl: eachData['countryInfo']['flag'],
         );
         countriesData.add(countryData);
       }
@@ -107,13 +109,13 @@ class _DashboardState extends State<Dashboard> {
       }
 
       locationData = CountryVirusData(
-        country: virusData['country'] ?? 'None',
-        confirmedCases: virusData['cases'] ?? 0,
-        recovered: virusData['recovered'] ?? 0,
-        deaths: virusData['deaths'] ?? 0,
-        todayCases: virusData['todayCases'] ?? 0,
-        criticalCases: virusData['critical'] ?? 0,
-        todayDeaths: virusData['todayDeaths'] ?? 0,
+        country: virusData['country'],
+        confirmedCases: virusData['cases'],
+        recovered: virusData['recovered'],
+        deaths: virusData['deaths'],
+        todayCases: virusData['todayCases'],
+        criticalCases: virusData['critical'],
+        todayDeaths: virusData['todayDeaths'],
       );
     });
   }
@@ -128,14 +130,9 @@ class _DashboardState extends State<Dashboard> {
             SizedBox(height: 50),
             Text('COVID-19 TRACKER', style: kHeadingTextStyle),
             SizedBox(height: 20),
-            Text('build: v0.6.5 Beta'),
+            Text('build: v1.0'),
             SizedBox(height: 20),
-            Text(
-              'Under Development\nThanks for testing!',
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            Text('Designed and Developed\n with ❤  by: \nMadhav Tripathi',
+            Text('Designed and Developed by: \nMadhav Tripathi',
                 textAlign: TextAlign.center),
             SizedBox(height: 20),
             SizedBox(height: 20),
@@ -149,7 +146,7 @@ class _DashboardState extends State<Dashboard> {
                   'assets/images/bing.png',
                   height: 50,
                   width: 50,
-                  color: isLight ? Colors.black : Colors.white,
+                  color: !isLight ? Colors.white : Colors.black,
                 ),
                 trailing: Icon(
                   index == 0 ? Icons.check_box : Icons.check_box_outline_blank,
@@ -195,6 +192,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+     isLight = DynamicTheme.of(context).brightness==Brightness.light;
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
@@ -202,7 +200,7 @@ class _DashboardState extends State<Dashboard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Text(
                 'COVID-19 Tracker',
                 textAlign: TextAlign.center,
@@ -214,12 +212,11 @@ class _DashboardState extends State<Dashboard> {
               SizedBox(height: 20),
               InkWell(
                 onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                        return CountriesInfoScreen(
-                          countryVirusData: widget.countriesData,
-                        );
-                      }))
-                   ,
+                    MaterialPageRoute(builder: (context) {
+                  return CountriesInfoScreen(
+                    countryVirusData: widget.countriesData,
+                  );
+                })),
                 child: Hero(
                   tag: 'Countries',
                   child: Card(
@@ -271,10 +268,6 @@ class _DashboardState extends State<Dashboard> {
                               false, Colors.green),
                           DataListItem('Deaths: ${locationData.deaths}', false,
                               Colors.red),
-
-                          // DataListItem('Critical Cases ${locationData.criticalCases}'),
-                          // DataListItem('Today\'s Cases: ${locationData.todayCases}'),
-                          // DataListItem('Today\'s Deaths: ${locationData.todayDeaths}'),
                         ],
                       ),
                     ),
@@ -333,7 +326,7 @@ class _DashboardState extends State<Dashboard> {
                           'assets/images/world.png',
                           height: 50,
                           width: 50,
-                          color: isLight ? Colors.black : Colors.white,
+                          color: !isLight ? Colors.white : Colors.black,
                         ),
                         Text(' All Countries'),
                       ]),
@@ -352,7 +345,7 @@ class _DashboardState extends State<Dashboard> {
                             'assets/images/india.png',
                             height: 50,
                             width: 50,
-                            color: isLight ? Colors.black : Colors.white,
+                            color: !isLight ? Colors.white : Colors.black,
                           ),
                           Text(' States of India'),
                         ],

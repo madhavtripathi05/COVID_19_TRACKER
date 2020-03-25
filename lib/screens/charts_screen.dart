@@ -24,9 +24,9 @@ class _ChartsScreenState extends State<ChartsScreen> {
   void initState() {
     getAndSetData();
 
-    _dataMap.putIfAbsent('cases', () => widget.cases ?? 0);
-    _dataMap.putIfAbsent('deaths', () => widget.deaths ?? 0);
-    _dataMap.putIfAbsent('recovered', () => widget.recovered ?? 0);
+    _dataMap.putIfAbsent('cases', () => widget.cases );
+    _dataMap.putIfAbsent('deaths', () => widget.deaths );
+    _dataMap.putIfAbsent('recovered', () => widget.recovered );
     super.initState();
   }
 
@@ -130,27 +130,29 @@ class _ChartsScreenState extends State<ChartsScreen> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '${widget.countryName ?? 'Country Name'}',
+                        '${widget.countryName}',
                         style: TextStyle(
-                            fontSize: 34.0, fontWeight: FontWeight.bold),
+                            fontSize: 34.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrangeAccent),
                       ),
                       SizedBox(height: 30),
                       Text(
-                        'Cases: ${widget.cases ?? 'Country Cases'}',
+                        'Cases: ${widget.cases}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.amber),
                       ),
                       Text(
-                        'Deaths: ${widget.deaths ?? 'Country Deaths'}',
+                        'Deaths: ${widget.deaths}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.red),
                       ),
                       Text(
-                        'Recovered: ${widget.recovered ?? 'recovered'}',
+                        'Recovered: ${widget.recovered}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -189,9 +191,11 @@ class _ChartsScreenState extends State<ChartsScreen> {
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '${widget.countryName ?? 'Country Name'}',
+                        '${widget.countryName}',
                         style: TextStyle(
-                            fontSize: 34.0, fontWeight: FontWeight.bold),
+                            fontSize: 34.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrangeAccent),
                       ),
                       SizedBox(height: 20),
                       Expanded(
@@ -203,7 +207,6 @@ class _ChartsScreenState extends State<ChartsScreen> {
                               includePoints: true,
                               radiusPx: 2.5,
                               includeLine: true,
-                              
                             ),
                             animate: true,
                             animationDuration: Duration(seconds: 1),

@@ -63,7 +63,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             'COVID-19 TRACKER',
             style: kHeadingTextStyle.copyWith(color: Colors.blue),
           ),
-          Text('Beta v0.6.5',
+          Text('v1.0',
               style: kUrlTextStyle.copyWith(color: Colors.amberAccent)),
           SizedBox(height: 20),
           Text(

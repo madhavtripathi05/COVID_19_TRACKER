@@ -1,5 +1,6 @@
 class CountryVirusData {
   String country = '';
+  String flagUrl = '';
   int confirmedCases = 0;
   int criticalCases = 0;
   int deaths = 0;
@@ -11,6 +12,7 @@ class CountryVirusData {
       {this.confirmedCases,
       this.country,
       this.deaths,
+      this.flagUrl,
       this.recovered,
       this.criticalCases,
       this.todayCases,

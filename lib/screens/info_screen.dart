@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
@@ -12,7 +13,7 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  VideoPlayerController _controller1;
+
   VideoPlayerController _controller2;
 
   @override
@@ -25,8 +26,17 @@ class _InfoScreenState extends State<InfoScreen> {
 
     _controller2 = VideoPlayerController.asset("assets/videos/whatandhow.mkv");
     _controller2.initialize().then((_) => setState(() {}));
-
+    getData();
     super.initState();
+  }
+
+  Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/info/info.txt');
+  }
+
+  String info;
+  void getData() async {
+    info = await loadAsset();
   }
 
   @override
@@ -77,12 +87,25 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                 ],
               ),
-              // SizedBox(height: 20),
-              // Text('What is Corona Virus ?', style: kHeadingTextStyle),
-              // playVideo(_controller1),
               SizedBox(height: 20),
-              Text('How to Protect Yourself ?', style: kHeadingTextStyle),
+              Text(
+                'What is COVID-19 ? &\nHow to Protect Yourself ?',
+                style:  TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.lightBlueAccent),
+                textAlign: TextAlign.center,
+              ),
               playVideo(_controller2),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '$info',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.green),
+                ),
+              ),
               SizedBox(height: 20),
             ],
           ),
@@ -95,7 +118,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return Container(
       padding: EdgeInsets.all(20),
       child: AspectRatio(
-        aspectRatio: _controller1.value.aspectRatio,
+        aspectRatio: _controller2.value.aspectRatio,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
