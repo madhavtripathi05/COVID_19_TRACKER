@@ -5,18 +5,19 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 <img src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/cov.jpeg" >
 
 
-# Dashboard Screen:
+# Dashboard:
 
 <span>
- <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(11).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(12).png" />
+ <img height=433 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(11).png" />
+ &nbsp;&nbsp;&nbsp;&nbsp;
+  <img height=433 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(12).png" />
 </span>
 
 &nbsp;
 
 ![covid19tracker](https://img.shields.io/badge/COVID__19__TRACKER-v1.0-green)
 
-# Download APK from [Here](https://drive.google.com/open?id=1p2dF9FvL_zKr0WKUvp_IiYTC4KSaWHAF)
+# Download APK from [Here](https://drive.google.com/open?id=1WzI6s1jNgByYEzU7Hc-tuvs5QzBi16hJ)
 
 ## Features
 * __Live data__ : Get live data from [worldometers.info](https://www.worldometers.info/coronavirus/)
@@ -29,9 +30,9 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 * __Charts and InfoGraphs__ : Get InfoGraphs for your Country.
 
 ## How to Run?
-* 1) Open this project in Android Studio / VS Code.
-* 2) Get Dependencies by running: "pub get".
-* 3) For testing, run command "flutter run".
+ 1) Open this project in Android Studio / VS Code.
+ 2) Get Dependencies by running: "pub get".
+ 3) For testing, run command "flutter run".
 
 <details>
   <summary><strong>Screenshots</strong></summary> 
@@ -47,20 +48,9 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(10).png" />
   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(11).png" />
   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(12).png" />
-    <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(13).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(14).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(15).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(16).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(17).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(18).png" />
-   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(19).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(20).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(21).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(22).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(23).png" />
-  <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(24).png" />
-   <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(25).png" />
-    <img height=400 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(26).png" />
+
+   <img height=433 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(25).png" />
+    <img height=433 width=200 src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/screen%20(26).png" />
 </details>
 
 ### API used:
