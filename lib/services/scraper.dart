@@ -35,13 +35,11 @@ class Scraper {
 
     List<Map<String, dynamic>> dataMap = [];
 
-    for (var i = 0; i < (data.length - 6);) {
-      //don't change order you over-smart
+    for (var i = 0; i < (data.length - 5);) {
       dataMap.add({
         'index': data[i++],
         'stateName': data[i++],
         'confirmedCases': data[i++],
-        'confirmedCasesNRI': data[i++],
         'recovered': data[i++],
         'deaths': data[i++],
       });

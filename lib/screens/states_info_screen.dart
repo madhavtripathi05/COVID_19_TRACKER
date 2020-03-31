@@ -43,10 +43,6 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
                 'Confirmed(Indians): ${statesForDisplay[index].confirmedCases}',
                 false,
                 Colors.amber),
-            DataListItem(
-                'Confirmed(NRI): ${statesForDisplay[index].confirmedCasesNRI}',
-                false,
-                Colors.amberAccent),
             DataListItem('Recovered: ${statesForDisplay[index].recovered}',
                 false, Colors.green),
             DataListItem(
@@ -63,7 +59,6 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
       if (virusData == null) {
         locationData = StateVirusData(
           confirmedCases: '0',
-          confirmedCasesNRI: '0',
           deaths: '0',
           index: '0',
           recovered: '0',
@@ -74,7 +69,6 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
       for (var eachData in virusData) {
         locationData = StateVirusData(
           confirmedCases: eachData['confirmedCases'] ?? '',
-          confirmedCasesNRI: eachData['confirmedCasesNRI'] ?? '',
           deaths: eachData['deaths'] ?? '',
           index: eachData['index'] ?? '',
           recovered: eachData['recovered'] ?? '',

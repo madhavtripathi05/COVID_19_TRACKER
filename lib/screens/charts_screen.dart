@@ -24,9 +24,9 @@ class _ChartsScreenState extends State<ChartsScreen> {
   void initState() {
     getAndSetData();
 
-    _dataMap.putIfAbsent('cases', () => widget.cases );
-    _dataMap.putIfAbsent('deaths', () => widget.deaths );
-    _dataMap.putIfAbsent('recovered', () => widget.recovered );
+    _dataMap.putIfAbsent('cases', () => widget.cases);
+    _dataMap.putIfAbsent('deaths', () => widget.deaths);
+    _dataMap.putIfAbsent('recovered', () => widget.recovered);
     super.initState();
   }
 
@@ -138,21 +138,21 @@ class _ChartsScreenState extends State<ChartsScreen> {
                       ),
                       SizedBox(height: 30),
                       Text(
-                        'Cases: ${widget.cases}',
+                        'Cases: ${widget.cases.toStringAsFixed(0)}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.amber),
                       ),
                       Text(
-                        'Deaths: ${widget.deaths}',
+                        'Deaths: ${widget.deaths.toStringAsFixed(0)}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.red),
                       ),
                       Text(
-                        'Recovered: ${widget.recovered}',
+                        'Recovered: ${widget.recovered.toStringAsFixed(0)}',
                         style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
