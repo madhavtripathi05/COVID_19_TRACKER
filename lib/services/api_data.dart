@@ -38,8 +38,16 @@ class ApiData {
         NetworkAPI('https://corona.lmao.ninja/v2/historical/$country');
     var indiaHistoricalData = networkAPI.getData();
     print(indiaHistoricalData.toString());
-    // var jsonEncode = json.encode(indiaHistoricalData);
     return indiaHistoricalData;
+  }
+
+  Future<dynamic> getWorldHistoricalData() async {
+    //fetching data from API
+    NetworkAPI networkAPI =
+        NetworkAPI('https://corona.lmao.ninja/v2/historical/all');
+    var allHistoricalData = networkAPI.getData();
+    print(allHistoricalData.toString());
+    return allHistoricalData;
   }
 }
 

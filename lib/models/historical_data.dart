@@ -6,11 +6,11 @@ class CountryHistoricalData {
   int recovered = 0;
 }
 
-class IndiaHistoricalData {
+class HistoricalData {
   String date = '';
   int cases = 0;
   int deaths = 0;
   int recovered = 0;
 
-  IndiaHistoricalData({this.cases, this.date, this.deaths, this.recovered});
+  HistoricalData({this.cases, this.date, this.deaths, this.recovered});
 }

@@ -6,7 +6,7 @@ import 'package:pie_chart/pie_chart.dart';
 
 import '../services/api_data.dart';
 import '../constants/constants.dart';
-import '../models/country_historical_data.dart';
+import '../models/historical_data.dart';
 
 class ChartsScreen extends StatefulWidget {
   static const routeName = '/charts';
@@ -32,8 +32,8 @@ class _ChartsScreenState extends State<ChartsScreen> {
 
   ApiData apiData = ApiData();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<IndiaHistoricalData> countryData = [];
-  List<charts.Series<IndiaHistoricalData, int>> _lineSeriesData = [];
+  List<HistoricalData> countryData = [];
+  List<charts.Series<HistoricalData, int>> _lineSeriesData = [];
   Map<String, double> _dataMap = Map();
 
   Map<String, dynamic> cases = Map();
@@ -41,25 +41,42 @@ class _ChartsScreenState extends State<ChartsScreen> {
   Map<String, dynamic> deaths = Map();
 
   void getAndSetData() async {
-    Map<String, dynamic> histData =
-        await apiData.getCountryHistoricalData('${widget.countryName}');
+    Map<String, dynamic> histData = widget.countryName == 'world'
+        ? await apiData.getWorldHistoricalData()
+        : await apiData.getCountryHistoricalData('${widget.countryName}');
     setState(() {
       if (histData == null || widget.cases == null) {
         print('error Null data obtained');
         return;
       }
 
+      if (widget.countryName == 'world') {
+        cases = histData['cases'];
+        deaths = histData['deaths'];
+        recovered = histData['recovered'];
+
+        for (var i = 0; i < cases.length; i++) {
+          final myData = HistoricalData(
+            date: cases.keys.elementAt(i).toString(),
+            cases: cases.values.elementAt(i),
+            deaths: deaths.values.elementAt(i),
+            recovered: recovered.values.elementAt(i),
+          );
+          countryData.add(myData);
+        }
+        return;
+      }
+
       cases = histData['timeline']['cases'];
       deaths = histData['timeline']['deaths'];
-
-      // recovered = histData['timeline']['recovered'];// deprecated from API
+      recovered = histData['timeline']['recovered'];
 
       for (var i = 0; i < cases.length; i++) {
-        final myData = IndiaHistoricalData(
+        final myData = HistoricalData(
           date: cases.keys.elementAt(i).toString(),
           cases: cases.values.elementAt(i),
-          // recovered: recovered.values.elementAt(i), //deprecated
           deaths: deaths.values.elementAt(i),
+          recovered: recovered.values.elementAt(i),
         );
         countryData.add(myData);
       }
@@ -70,20 +87,20 @@ class _ChartsScreenState extends State<ChartsScreen> {
       // }
 
       _lineSeriesData.add(charts.Series(
-          colorFn: (IndiaHistoricalData data, _) =>
+          colorFn: (HistoricalData data, _) =>
               charts.Color.fromHex(code: '#c31432'),
           data: countryData,
-          domainFn: (IndiaHistoricalData data, _) => data.cases,
-          measureFn: (IndiaHistoricalData data, _) => data.deaths,
+          domainFn: (HistoricalData data, _) => data.cases,
+          measureFn: (HistoricalData data, _) => data.deaths,
           id: 'DEATHS'));
 
-      // _lineSeriesData.add(charts.Series(
-      //     colorFn: (IndiaHistoricalData data, _) =>
-      //         charts.Color.fromHex(code: '#0f9b0f'),
-      //     data: countryData,
-      //     domainFn: (IndiaHistoricalData data, _) => data.cases,
-      //     measureFn: (IndiaHistoricalData data, _) => data.recovered,
-      //     id: 'RECOVERED'));// deprecated
+      _lineSeriesData.add(charts.Series(
+          colorFn: (HistoricalData data, _) =>
+              charts.Color.fromHex(code: '#0f9b0f'),
+          data: countryData,
+          domainFn: (HistoricalData data, _) => data.cases,
+          measureFn: (HistoricalData data, _) => data.recovered,
+          id: 'RECOVERED'));
     });
   }
 
@@ -229,6 +246,16 @@ class _ChartsScreenState extends State<ChartsScreen> {
                                   color: charts.Color.fromHex(code: '#c31432'),
                                 ),
                                 behaviorPosition: charts.BehaviorPosition.start,
+                                titleOutsideJustification:
+                                    charts.OutsideJustification.middleDrawArea,
+                              ),
+                              charts.ChartTitle(
+                                'Number of people recovered',
+                                titleStyleSpec: charts.TextStyleSpec(
+                                  fontFamily: 'google',
+                                  color: charts.Color.fromHex(code: '#0f9b0f'),
+                                ),
+                                behaviorPosition: charts.BehaviorPosition.end,
                                 titleOutsideJustification:
                                     charts.OutsideJustification.middleDrawArea,
                               ),
