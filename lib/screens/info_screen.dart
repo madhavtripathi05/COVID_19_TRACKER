@@ -90,10 +90,10 @@ class _InfoScreenState extends State<InfoScreen> {
               SizedBox(height: 20),
               Text(
                 'What is COVID-19 ? &\nHow to Protect Yourself ?',
-                style:  TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.lightBlueAccent),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.lightBlueAccent),
                 textAlign: TextAlign.center,
               ),
               playVideo(_controller2),
@@ -101,7 +101,7 @@ class _InfoScreenState extends State<InfoScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  '$info',
+                  info ?? 'Loading...',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.green),
                 ),

@@ -5,7 +5,7 @@ import '../services/network_api.dart';
 class ApiData {
   Future<dynamic> getVirusData() async {
     //fetching data from API
-    NetworkAPI networkAPI = NetworkAPI('https://corona.lmao.ninja/all');
+    NetworkAPI networkAPI = NetworkAPI('https://corona.lmao.ninja/v2/all');
     var virusData = networkAPI.getData();
     print(virusData.toString());
     return virusData;
@@ -18,7 +18,7 @@ class ApiData {
     String country = location.country;
     //fetching data from API
     NetworkAPI networkAPI = NetworkAPI(
-        'https://corona.lmao.ninja/countries/${country.toLowerCase()}');
+        'https://corona.lmao.ninja/v2/countries/${country.toLowerCase()}');
     var locationVirusData = networkAPI.getData();
     print(locationVirusData.toString());
     return locationVirusData;
@@ -26,7 +26,7 @@ class ApiData {
 
   Future<dynamic> getCountriesVirusData() async {
     //fetching data from API
-    NetworkAPI networkAPI = NetworkAPI('https://corona.lmao.ninja/countries');
+    NetworkAPI networkAPI = NetworkAPI('https://corona.lmao.ninja/v2/countries?yesterday=false&sort=cases');
     var countriesVirusData = networkAPI.getData();
     print(countriesVirusData.toString());
     return countriesVirusData;
