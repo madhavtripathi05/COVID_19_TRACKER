@@ -17,7 +17,7 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 
 ![covid19tracker](https://img.shields.io/badge/COVID__19__TRACKER-v1.0-green)
 
-# Download APK from [Here](https://drive.google.com/open?id=1WzI6s1jNgByYEzU7Hc-tuvs5QzBi16hJ)
+# Download APK from [Here](https://drive.google.com/open?id=1e1NT-4iOSjYdc906aj1rqIGusq2-JCWy)
 
 ## Features
 * __Live data__ : Get live data from [worldometers.info](https://www.worldometers.info/coronavirus/)
