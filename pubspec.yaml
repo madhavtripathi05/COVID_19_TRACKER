@@ -19,19 +19,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animations: ^1.1.1
+  location: ^3.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   charts_flutter: ^0.9.0
   dynamic_theme: ^1.0.1
-  fl_chart: 
+  fl_chart:
   flutter_spinkit: ^4.1.2
   flutter_webview_plugin: ^0.3.10+1
   font_awesome_flutter: ^8.7.0
   geolocator: ^5.3.0
   html:
-  http:  
+  http:
   pie_chart: ^3.1.1
   url_launcher: ^5.4.2
   video_player: ^0.10.8+1
@@ -42,7 +44,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter_icons:
-  android: "launcher_icon" 
+  android: "launcher_icon"
   ios: true
   image_path: "assets/images/logol.png"
 
@@ -51,7 +53,6 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -59,9 +60,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/images/
-   - assets/videos/whatandhow.mkv
-   - assets/info/info.txt
+    - assets/images/
+    - assets/videos/whatandhow.mkv
+    - assets/info/info.txt
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

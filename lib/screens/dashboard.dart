@@ -1,8 +1,10 @@
-import 'package:covid_19_tracker/screens/charts_screen.dart';
-import 'package:covid_19_tracker/screens/countries_info_screen.dart';
-import 'package:covid_19_tracker/screens/states_info_screen.dart';
+import 'package:animations/animations.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/charts_screen.dart';
+import '../screens/countries_info_screen.dart';
+import '../screens/states_info_screen.dart';
 
 import '../constants/constants.dart';
 
@@ -37,7 +39,7 @@ class _DashboardState extends State<Dashboard> {
   int index = 0;
   List<CountryVirusData> countriesData = [];
   bool isLight;
-  
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -168,22 +170,6 @@ class _DashboardState extends State<Dashboard> {
                   color: isLight ? Colors.black : Colors.white,
                 ),
                 onTap: () => setState(() => index = 1)),
-            ListTile(
-                leading: Image.asset(
-                  'assets/images/who.png',
-                  height: 50,
-                  width: 50,
-                  color: isLight ? Colors.black : Colors.white,
-                ),
-                title: Text('WHO', style: kHeadingTextStyle),
-                subtitle: Text('https://experience.arcgis.com/experience',
-                    style: kUrlTextStyle),
-                trailing: Icon(
-                  index == 2 ? Icons.check_box : Icons.check_box_outline_blank,
-                  color: isLight ? Colors.black : Colors.white,
-                ),
-                onTap: () => setState(() => index = 2)),
-            SizedBox(height: 20),
           ],
         ),
       ),
@@ -192,7 +178,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-     isLight = DynamicTheme.of(context).brightness==Brightness.light;
+    isLight = DynamicTheme.of(context).brightness == Brightness.light;
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
@@ -211,12 +197,20 @@ class _DashboardState extends State<Dashboard> {
               ),
               SizedBox(height: 20),
               InkWell(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                  return CountriesInfoScreen(
-                    countryVirusData: widget.countriesData,
-                  );
-                })),
+                onTap: () => Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 500),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          CountriesInfoScreen(
+                        countryVirusData: widget.countriesData,
+                      ),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeScaleTransition(
+                            animation: animation, child: child);
+                      },
+                    )),
                 child: Hero(
                   tag: 'Countries',
                   child: Card(
@@ -242,12 +236,25 @@ class _DashboardState extends State<Dashboard> {
               ),
               InkWell(
                 onTap: () => locationData.country == 'India'
-                    ? Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                        return StatesInfoScreen(
-                          stateVirusData: widget.statesData,
-                        );
-                      }))
+                    ? Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 500),
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  StatesInfoScreen(
+                            stateVirusData: widget.statesData,
+                          ),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            return SharedAxisTransition(
+                              child: child,
+                              animation: animation,
+                              secondaryAnimation: secondaryAnimation,
+                              transitionType: SharedAxisTransitionType.scaled,
+                            );
+                          },
+                        ))
                     : null,
                 child: Hero(
                   tag: 'States',

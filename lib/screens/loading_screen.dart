@@ -1,3 +1,5 @@
+import 'package:animations/animations.dart';
+import 'package:covid_19_tracker/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,9 +18,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   ApiData apiData = ApiData();
-  Scraper scraper = Scraper();
 
-  static bool isLight = DynamicThemeState().brightness == Brightness.light;
   @override
   void initState() {
     FlutterWebviewPlugin().close();
@@ -30,15 +30,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var data = await apiData.getVirusData();
     var locationData = await apiData.getLocationVirusData();
     var countriesData = await apiData.getCountriesVirusData();
-    var statesData = await scraper.initiate();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return Dashboard(
-        countriesData: countriesData,
-        locationVirusData: locationData,
-        virusData: data,
-        statesData: statesData,
-      );
-    }));
+    var statesData = await apiData.getStatesData();
+    Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(milliseconds: 1000),
+          pageBuilder: (context, animation, secondaryAnimation) => Dashboard(
+            countriesData: countriesData,
+            locationVirusData: locationData,
+            virusData: data,
+            statesData: statesData,
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeScaleTransition(animation: animation, child: child);
+          },
+        ));
   }
 
   final spinkit1 = SpinKitPulse(

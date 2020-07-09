@@ -1,9 +1,8 @@
 # COVID_19_TRACKER
+
 A minimal App built using Flutter which shows live data about Corona Virus outbreak.
 
-
 <img src="https://github.com/madhavtripathi05/COVID_19_TRACKER/blob/master/assets/screenshots/cov.jpeg" >
-
 
 # Dashboard:
 
@@ -17,22 +16,24 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 
 ![covid19tracker](https://img.shields.io/badge/COVID__19__TRACKER-v1.0-green)
 
-# Download APK from [Here](https://drive.google.com/open?id=1e1NT-4iOSjYdc906aj1rqIGusq2-JCWy)
+# Download APK from [Here](https://drive.google.com/file/d/10NF_H_SS8nHmBm_WdzMsEK58-lVRZIRo)
 
 ## Features
-* __Live data__ : Get live data from [worldometers.info](https://www.worldometers.info/coronavirus/)
-* __Live Maps__ : Get a Webview of Here Maps, Bing, WHO (select one from end Drawer).
-* __Indian States__ : Get live data from [MOHFW](https://www.mohfw.gov.in/)
-* __Call Helpline__ : Directly call helpline for CoronaVirus (India only).
-* __Search__ : Added Search Option for ease of use.
-* __Dark Theme__ : Dark Theme to use during night.
-* __Informative Videos__ : Informative Videos from WHO's official YouTube Channel.
-* __Charts and InfoGraphs__ : Get InfoGraphs for your Country.
+
+- **Live data** : Get live data from [worldometers.info](https://www.worldometers.info/coronavirus/)
+- **Live Maps** : Webview of Here Maps, Bing, WHO (select one from end Drawer).
+- **Indian States** : Live data from [MOHFW](https://www.mohfw.gov.in/)
+- **Call Helpline** : Directly call helpline for CoronaVirus (India only).
+- **Search** : Added Search Option for ease of use.
+- **Dark Theme** : Dark Theme to use during night.
+- **Informative Videos** : Informative Videos from WHO's official YouTube Channel.
+- **Charts and InfoGraphs** : Get InfoGraphs for your Country.
 
 ## How to Run?
- 1) Open this project in Android Studio / VS Code.
- 2) Get Dependencies by running: "pub get".
- 3) For testing, run command "flutter run".
+
+1.  Open this project in Android Studio / VS Code.
+2.  Get Dependencies by running: "pub get".
+3.  For testing, run command "flutter run".
 
 <details>
   <summary><strong>Screenshots</strong></summary> 
@@ -54,4 +55,6 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 </details>
 
 ### API used:
-[NovelCOVID/API](https://github.com/NovelCOVID/API)
+
+[disease-sh/API](https://github.com/disease-sh/API)
+[amodm/api-covid19-in](https://github.com/amodm/api-covid19-in)

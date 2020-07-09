@@ -1,3 +1,5 @@
+/*
+!DEPRECATED
 import 'dart:convert';
 
 import 'package:http/http.dart';
@@ -53,4 +55,4 @@ class Scraper {
 // for testing
 void main() async {
   await Scraper().initiate();
-}
+}*/

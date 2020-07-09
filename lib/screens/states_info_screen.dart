@@ -19,7 +19,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
 
   @override
   void initState() {
-    updateStatesUI(widget.stateVirusData);
+    updateStatesUI(widget.stateVirusData['data']['regional']);
     super.initState();
   }
 
@@ -39,10 +39,8 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
                 '${index + 1}.  ${statesForDisplay[index].stateName}  ',
                 true,
                 Colors.deepOrangeAccent),
-            DataListItem(
-                'Confirmed: ${statesForDisplay[index].confirmedCases}',
-                false,
-                Colors.amber),
+            DataListItem('Confirmed: ${statesForDisplay[index].confirmedCases}',
+                false, Colors.amber),
             DataListItem('Recovered: ${statesForDisplay[index].recovered}',
                 false, Colors.green),
             DataListItem(
@@ -58,21 +56,19 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
     setState(() {
       if (virusData == null) {
         locationData = StateVirusData(
-          confirmedCases: '0',
-          deaths: '0',
-          index: '0',
-          recovered: '0',
+          confirmedCases: 0,
+          deaths: 0,
+          recovered: 0,
           stateName: 'None',
         );
         return;
       }
       for (var eachData in virusData) {
         locationData = StateVirusData(
-          confirmedCases: eachData['confirmedCases'] ?? '',
+          confirmedCases: eachData['totalConfirmed'] ?? '',
           deaths: eachData['deaths'] ?? '',
-          index: eachData['index'] ?? '',
-          recovered: eachData['recovered'] ?? '',
-          stateName: eachData['stateName'] ?? '',
+          recovered: eachData['discharged'] ?? '',
+          stateName: eachData['loc'] ?? '',
         );
         statesData.add(locationData);
       }
@@ -96,7 +92,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
           setState(() {
             statesForDisplay = statesData.where((state) {
               var sName = state.stateName.toLowerCase();
-              return sName.startsWith(text)||sName.contains(text);
+              return sName.startsWith(text) || sName.contains(text);
             }).toList();
           });
         },
@@ -106,7 +102,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
 
   Widget buildList() {
     return Expanded(
-          child: ListView.builder(
+      child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: statesForDisplay.length + 1,
         itemBuilder: (ctx, index) => SingleChildScrollView(
@@ -160,7 +156,6 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
           ],
         ),
       ),
-      
     );
   }
 }

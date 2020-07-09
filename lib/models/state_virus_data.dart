@@ -1,14 +1,12 @@
 class StateVirusData {
-  String confirmedCases = '';
-  String deaths = '';
-  String index = '';
-  String recovered = '';
+  int confirmedCases = 0;
+  int deaths = 0;
+  int recovered = 0;
   String stateName = '';
 
   StateVirusData({
     this.confirmedCases,
     this.deaths,
-    this.index,
     this.recovered,
     this.stateName,
   });
