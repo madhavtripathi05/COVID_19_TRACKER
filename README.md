@@ -34,6 +34,7 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 1.  Open this project in Android Studio / VS Code.
 2.  Get Dependencies by running: "pub get".
 3.  For testing, run command "flutter run".
+4.  Can run preferably in Android emulator.
 
 <details>
   <summary><strong>Screenshots</strong></summary> 
