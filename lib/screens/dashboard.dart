@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../screens/charts_screen.dart';
@@ -19,7 +20,6 @@ import '../screens/loading_screen.dart';
 import '../screens/maps_screen.dart';
 
 import '../widgets/data_list_item.dart';
-import '../widgets/info_bottom_sheet.dart';
 
 class Dashboard extends StatefulWidget {
   static const routeName = '/dashboard';

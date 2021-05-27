@@ -18,12 +18,12 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   ApiData apiData = ApiData();
-
+  bool appleDevice = false;
   @override
   void initState() {
     if (!kIsWeb) FlutterWebviewPlugin().close();
+    if (!kIsWeb) handleLocationPermission();
     super.initState();
-    handleLocationPermission();
     getAndSetData();
   }
 

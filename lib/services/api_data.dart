@@ -16,11 +16,12 @@ class ApiData {
 
   Future<dynamic> getLocationVirusData() async {
     //getting location
-    MyLocationData location = MyLocationData();
-    final position = await location.getLocationData();
-    final coordinates = new Coordinates(position.latitude, position.longitude);
     String country = 'IN';
     if (!kIsWeb) {
+      MyLocationData location = MyLocationData();
+      final position = await location.getLocationData();
+      final coordinates =
+          new Coordinates(position.latitude, position.longitude);
       var addresses =
           await Geocoder.local.findAddressesFromCoordinates(coordinates);
       country = addresses.first.countryCode;
