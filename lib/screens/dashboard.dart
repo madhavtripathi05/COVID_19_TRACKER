@@ -15,7 +15,6 @@ import '../extensions/hover_extension.dart';
 import '../models/virus_data.dart';
 import '../models/country_virus_data.dart';
 
-import '../screens/info_screen.dart';
 import '../screens/loading_screen.dart';
 import '../screens/maps_screen.dart';
 
@@ -137,12 +136,6 @@ class _DashboardState extends State<Dashboard> {
           children: <Widget>[
             SizedBox(height: 50),
             Text('COVID-19 TRACKER', style: kHeadingTextStyle),
-            SizedBox(height: 20),
-            Text('build: v2.0'),
-            SizedBox(height: 20),
-            Text('Designed and Developed by: \nMadhav Tripathi',
-                textAlign: TextAlign.center),
-            SizedBox(height: 20),
             SizedBox(height: 20),
             Text('Select Map Provider :', style: kHeadingTextStyle),
             SizedBox(height: 20),
@@ -306,7 +299,6 @@ class _DashboardState extends State<Dashboard> {
                     style: TextStyle(fontSize: 7, color: Colors.greenAccent),
                   ),
                 ),
-                SizedBox(height: 30),
                 Container(
                   height: 130,
                   child: SingleChildScrollView(
@@ -328,21 +320,6 @@ class _DashboardState extends State<Dashboard> {
                             title: 'InfoGraphs'),
                         buildCard(
                             context: context,
-                            screen: MapsScreen(index: index),
-                            onTap: kIsWeb
-                                ? () async {
-                                    final urlString =
-                                        'https://app.developer.here.com/coronavirus/';
-                                    if (await canLaunch(urlString))
-                                      launch(urlString);
-                                    else
-                                      print('can\'t launch this url');
-                                  }
-                                : null,
-                            icon: Icons.map,
-                            title: 'Live Maps'),
-                        buildCard(
-                            context: context,
                             screen: CountriesInfoScreen(
                                 countryVirusData: widget.countriesData),
                             img: 'assets/images/world.png',
@@ -353,15 +330,6 @@ class _DashboardState extends State<Dashboard> {
                                 stateVirusData: widget.statesData),
                             img: 'assets/images/india.png',
                             title: 'States of India'),
-                        buildCard(
-                            context: context,
-                            icon: Icons.info_outline,
-                            onTap: () => _scaffoldKey.currentState!
-                                .showBottomSheet((context) => InfoBottomSheet(),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                    )),
-                            title: 'About Sources'),
                       ],
                     ),
                   ),
@@ -397,10 +365,42 @@ class _DashboardState extends State<Dashboard> {
                                   },
                                 ),
                             title: isLight ? ' Dark Theme' : ' Light Theme'),
+                        buildCard(
+                            context: context,
+                            screen: MapsScreen(index: index),
+                            onTap: kIsWeb
+                                ? () async {
+                                    final urlString =
+                                        'https://app.developer.here.com/coronavirus/';
+                                    if (await canLaunch(urlString))
+                                      launch(urlString);
+                                    else
+                                      print('can\'t launch this url');
+                                  }
+                                : null,
+                            icon: Icons.map,
+                            title: 'Live Maps'),
                       ],
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () async {
+                    final url = 'mailto:madhavcodes@gmail.com';
+                    if (await canLaunch(url))
+                      await launch(url);
+                    else
+                      print('can\'t launch url');
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text('Designed and Developed with 💙 by \nMadhav ',
+                        textAlign: TextAlign.center),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text('v 2.0'),
               ],
             ),
           ),
@@ -425,13 +425,25 @@ class _DashboardState extends State<Dashboard> {
         borderRadius: BorderRadius.circular(12),
         onTap: onTap == null
             ? () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => screen!),
-                )
+                context,
+                PageRouteBuilder(
+                  transitionDuration: Duration(milliseconds: 500),
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      screen!,
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    return SharedAxisTransition(
+                      child: child,
+                      animation: animation,
+                      secondaryAnimation: secondaryAnimation,
+                      transitionType: SharedAxisTransitionType.scaled,
+                    );
+                  },
+                ))
             : onTap,
         child: Container(
-          width: 100,
-          height: 100,
+          width: 110,
+          height: 110,
           padding: EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
