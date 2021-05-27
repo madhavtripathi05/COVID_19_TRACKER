@@ -1,8 +1,8 @@
 class StateVirusData {
-  int confirmedCases = 0;
-  int deaths = 0;
-  int recovered = 0;
-  String stateName = '';
+  int? confirmedCases = 0;
+  int? deaths = 0;
+  int? recovered = 0;
+  String? stateName = '';
 
   StateVirusData({
     this.confirmedCases,

@@ -7,12 +7,12 @@ class NetworkAPI {
   final String url;
 
   Future getData() async {
-    http.Response response = await http.get(url);
-    
+    http.Response response = await http.get(Uri.parse(url));
+
     // return if only request is successful
     if (response.statusCode == 200) {
       String data = response.body;
-      print(data);
+      // print(data);
       return jsonDecode(data);
     } else {
       print(response.statusCode);

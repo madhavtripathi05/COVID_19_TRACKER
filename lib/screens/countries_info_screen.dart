@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../constants/constants.dart';
 import '../models/country_virus_data.dart';
 import '../widgets/data_list_item.dart';
 import '../screens/charts_screen.dart';
+import '../extensions/hover_extension.dart';
 
 class CountriesInfoScreen extends StatefulWidget {
   static const routeName = '/countries-info-screen';
@@ -15,7 +15,7 @@ class CountriesInfoScreen extends StatefulWidget {
 }
 
 class CountriesInfoScreenState extends State<CountriesInfoScreen> {
-  CountryVirusData locationData;
+  CountryVirusData? locationData;
   List<CountryVirusData> countriesData = [];
   List<CountryVirusData> countriesForDisplay = [];
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -56,58 +56,67 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
 
   Widget buildList() {
     return Expanded(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: countriesForDisplay.length + 1,
-        itemBuilder: (ctx, index) => index == 0
-            ? _searchBar()
-            : SingleChildScrollView(
-                child: buildCard(index - 1),
-              ),
+      child: Container(
+        width: 500,
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: countriesForDisplay.length,
+          itemBuilder: (ctx, index) =>
+              SingleChildScrollView(child: buildCard(index)),
+        ),
       ),
     );
   }
 
   _searchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: TextField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+            ),
+            labelText: 'Search Countries',
+            hintText: 'Type India',
           ),
-          labelText: 'Search Countries',
-          hintText: 'Type India',
+          onChanged: (text) {
+            text = text.toLowerCase();
+            setState(() {
+              countriesForDisplay = countriesData.where((c) {
+                var cName = c.country!.toLowerCase();
+                return cName.contains(text);
+              }).toList();
+            });
+          },
         ),
-        onChanged: (text) {
-          text = text.toLowerCase();
-          setState(() {
-            countriesForDisplay = countriesData.where((c) {
-              var cName = c.country.toLowerCase();
-              return cName.contains(text);
-            }).toList();
-          });
-        },
       ),
     );
   }
 
   Widget buildCard(int index) {
-    return InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChartsScreen(
-            countryName: '${countriesForDisplay[index].country}',
-            cases: double.parse('${countriesForDisplay[index].confirmedCases}'),
-            deaths: double.parse('${countriesForDisplay[index].deaths}'),
-            recovered: double.parse('${countriesForDisplay[index].recovered}'),
+    return Card(
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: EdgeInsets.all(10),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChartsScreen(
+              countryName: '${countriesForDisplay[index].country}',
+              cases:
+                  double.parse('${countriesForDisplay[index].confirmedCases}'),
+              deaths: double.parse('${countriesForDisplay[index].deaths}'),
+              recovered:
+                  double.parse('${countriesForDisplay[index].recovered}'),
+            ),
           ),
         ),
-      ),
-      child: Card(
-        elevation: 7,
-        margin: EdgeInsets.all(10),
         child: Container(
           padding: EdgeInsets.all(10),
           child: Column(
@@ -140,7 +149,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
           ),
         ),
       ),
-    );
+    ).translateOnHover;
   }
 
   @override
@@ -167,7 +176,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
                 ),
                 IconButton(
                   icon: Icon(Icons.info_outline),
-                  onPressed: () => _scaffoldKey.currentState.showSnackBar(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
                         'Data Source: https://www.worldometers.info/coronavirus/',
@@ -179,6 +188,7 @@ class CountriesInfoScreenState extends State<CountriesInfoScreen> {
                 ),
               ],
             ),
+            Container(width: 500, child: _searchBar()),
             buildList(),
           ],
         ),

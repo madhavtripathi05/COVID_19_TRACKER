@@ -23,14 +23,15 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
     super.initState();
   }
 
-  StateVirusData locationData;
+  late StateVirusData locationData;
   List<StateVirusData> statesData = [];
   List<StateVirusData> statesForDisplay = [];
 
   Card buildCard(int index) {
     return Card(
-      elevation: 7,
       margin: EdgeInsets.all(10),
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -77,36 +78,44 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
   }
 
   _searchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: TextField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: TextField(
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+            ),
+            labelText: 'Search States',
+            hintText: 'Type Gujarat',
           ),
-          labelText: 'Search States',
-          hintText: 'Type Gujarat',
+          onChanged: (text) {
+            text = text.toLowerCase();
+            setState(() {
+              statesForDisplay = statesData.where((state) {
+                var sName = state.stateName!.toLowerCase();
+                return sName.startsWith(text) || sName.contains(text);
+              }).toList();
+            });
+          },
         ),
-        onChanged: (text) {
-          text = text.toLowerCase();
-          setState(() {
-            statesForDisplay = statesData.where((state) {
-              var sName = state.stateName.toLowerCase();
-              return sName.startsWith(text) || sName.contains(text);
-            }).toList();
-          });
-        },
       ),
     );
   }
 
   Widget buildList() {
     return Expanded(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        itemCount: statesForDisplay.length + 1,
-        itemBuilder: (ctx, index) => SingleChildScrollView(
-          child: index == 0 ? _searchBar() : buildCard(index - 1),
+      child: Container(
+        width: 500,
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: statesForDisplay.length,
+          itemBuilder: (ctx, index) => SingleChildScrollView(
+            child: buildCard(index),
+          ),
         ),
       ),
     );
@@ -136,7 +145,7 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
                 ),
                 IconButton(
                   icon: Icon(Icons.info_outline),
-                  onPressed: () => _scaffoldKey.currentState.showSnackBar(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       action: SnackBarAction(
                           textColor: Colors.greenAccent,
@@ -151,6 +160,10 @@ class _StatesInfoScreenState extends State<StatesInfoScreen> {
                   ),
                 ),
               ],
+            ),
+            Container(
+              width: 500,
+              child: _searchBar(),
             ),
             buildList(),
           ],

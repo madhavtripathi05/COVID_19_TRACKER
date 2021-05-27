@@ -1,62 +1,45 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-
-import 'package:location/location.dart' hide LocationAccuracy;
-import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
 
 class MyLocationData {
-  double latitude = 0.0;
-  double longitude = 0.0;
-  String country = '';
+  Future<Position> getLocationData() async {
+    bool serviceEnabled;
+    LocationPermission permission;
 
-  Future<void> getLocationData() async {
-    try {
-      // requesting location
-      if (Platform.isAndroid || Platform.isIOS) {
-        Position position = await Geolocator()
-            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-        latitude = position.latitude;
-        longitude = position.longitude;
-      } else if (kIsWeb) {
-        Location location = Location();
-
-        bool _serviceEnabled;
-        PermissionStatus _permissionGranted;
-        LocationData _locationData;
-
-        _serviceEnabled = await location.serviceEnabled();
-        if (!_serviceEnabled) {
-          _serviceEnabled = await location.requestService();
-          if (!_serviceEnabled) {
-            return;
-          }
-        }
-        _permissionGranted = await location.hasPermission();
-        if (_permissionGranted == PermissionStatus.denied) {
-          _permissionGranted = await location.requestPermission();
-          if (_permissionGranted != PermissionStatus.granted) {
-            return;
-          }
-        }
-
-        _locationData = await location.getLocation();
-
-        latitude = _locationData.latitude;
-        longitude = _locationData.longitude;
-      }
-
-      List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(
-          latitude, longitude,
-          localeIdentifier: 'en_US');
-      country = placemark[0].country;
-
-      //* Many More to do, Contribution required
-      country == 'United States' ? country = 'USA' : country = country;
-      country == 'United Kingdom' ? country = 'UK' : country = country;
-      print(country);
-    } catch (e) {
-      // return 'Error in getting info of your country';
-      print(e.toString());
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await openAppSettings();
+      return Future.error('Location services are disabled.');
     }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        await openAppSettings();
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      await openAppSettings();
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+
+    return await Geolocator.getCurrentPosition();
   }
 }

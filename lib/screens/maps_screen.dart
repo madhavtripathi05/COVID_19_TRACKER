@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MapsScreen extends StatefulWidget {
   static const routeName = '/maps_screen';
   final int index;
-  MapsScreen({this.index});
+  MapsScreen({required this.index});
 
   @override
   _MapsScreenState createState() => _MapsScreenState();
@@ -34,7 +34,7 @@ class _MapsScreenState extends State<MapsScreen> {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Okay!'),
               onPressed: () {
                 Navigator.of(context).pop();

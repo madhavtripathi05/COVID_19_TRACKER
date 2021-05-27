@@ -7,6 +7,7 @@ class InfoBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 350,
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 7),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

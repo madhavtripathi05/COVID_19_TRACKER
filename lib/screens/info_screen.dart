@@ -14,7 +14,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  VideoPlayerController _controller2;
+  late VideoPlayerController _controller2;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return await rootBundle.loadString('assets/info/info.txt');
   }
 
-  String info;
+  String? info;
   void getData() async {
     info = await loadAsset();
   }
@@ -70,7 +70,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   IconButton(
                     icon: Icon(Icons.info_outline),
-                    onPressed: () => _scaffoldKey.currentState.showSnackBar(
+                    onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         action: SnackBarAction(
                             textColor: Colors.greenAccent,
@@ -134,7 +134,7 @@ class _InfoScreenState extends State<InfoScreen> {
 }
 
 class _PlayPauseOverlay extends StatefulWidget {
-  const _PlayPauseOverlay({Key key, this.controller}) : super(key: key);
+  const _PlayPauseOverlay({required this.controller});
 
   final VideoPlayerController controller;
 

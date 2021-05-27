@@ -1,12 +1,16 @@
 import 'package:animations/animations.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../screens/charts_screen.dart';
 import '../screens/countries_info_screen.dart';
 import '../screens/states_info_screen.dart';
 
 import '../constants/constants.dart';
+
+import '../extensions/hover_extension.dart';
 
 import '../models/virus_data.dart';
 import '../models/country_virus_data.dart';
@@ -34,11 +38,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  VirusData data;
-  CountryVirusData locationData;
+  VirusData? data;
+  CountryVirusData? locationData;
   int index = 0;
   List<CountryVirusData> countriesData = [];
-  bool isLight;
+  bool isLight = false;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -122,17 +126,19 @@ class _DashboardState extends State<Dashboard> {
     });
   }
 
-  final flutterLogo = FlutterLogo();
   Widget options() {
     return Container(
       padding: EdgeInsets.all(10),
+      width: 500,
       child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 50),
             Text('COVID-19 TRACKER', style: kHeadingTextStyle),
             SizedBox(height: 20),
-            Text('build: v1.0'),
+            Text('build: v2.0'),
             SizedBox(height: 20),
             Text('Designed and Developed by: \nMadhav Tripathi',
                 textAlign: TextAlign.center),
@@ -178,291 +184,279 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    isLight = DynamicTheme.of(context).brightness == Brightness.light;
+    isLight = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 20),
-              Text(
-                'COVID-19 Tracker',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.blueAccent),
-              ),
-              SizedBox(height: 20),
-              InkWell(
-                onTap: () => Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration(milliseconds: 500),
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          CountriesInfoScreen(
-                        countryVirusData: widget.countriesData,
-                      ),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                        return FadeScaleTransition(
-                            animation: animation, child: child);
-                      },
-                    )),
-                child: Hero(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 20),
+                Text(
+                  'COVID-19 Tracker',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      color: Colors.blueAccent),
+                ),
+                SizedBox(height: 20),
+                Hero(
                   tag: 'Countries',
                   child: Card(
                     elevation: 7,
                     margin: EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: <Widget>[
-                          DataListItem(
-                              'Worldwide', true, Colors.deepOrangeAccent),
-                          DataListItem('Confirmed: ${data.confirmedCases}',
-                              false, Colors.amber),
-                          DataListItem('Recovered: ${data.recovered}', false,
-                              Colors.green),
-                          DataListItem(
-                              'Deaths: ${data.deaths}', false, Colors.red),
-                        ],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () => Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 500),
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    CountriesInfoScreen(
+                              countryVirusData: widget.countriesData,
+                            ),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return FadeScaleTransition(
+                                  animation: animation, child: child);
+                            },
+                          )),
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            DataListItem(
+                                'Worldwide', true, Colors.deepOrangeAccent),
+                            DataListItem('Confirmed: ${data!.confirmedCases}',
+                                false, Colors.amber),
+                            DataListItem('Recovered: ${data!.recovered}', false,
+                                Colors.green),
+                            DataListItem(
+                                'Deaths: ${data!.deaths}', false, Colors.red),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
+                  ).translateOnHover,
                 ),
-              ),
-              InkWell(
-                onTap: () => locationData.country == 'India'
-                    ? Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          transitionDuration: Duration(milliseconds: 500),
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  StatesInfoScreen(
-                            stateVirusData: widget.statesData,
-                          ),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            return SharedAxisTransition(
-                              child: child,
-                              animation: animation,
-                              secondaryAnimation: secondaryAnimation,
-                              transitionType: SharedAxisTransitionType.scaled,
-                            );
-                          },
-                        ))
-                    : null,
-                child: Hero(
+                Hero(
                   tag: 'States',
                   child: Card(
                     elevation: 7,
                     margin: EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: <Widget>[
-                          DataListItem('${locationData.country}', true,
-                              Colors.deepOrangeAccent),
-                          DataListItem(
-                              'Confirmed: ${locationData.confirmedCases}',
-                              false,
-                              Colors.amber),
-                          DataListItem('Recovered: ${locationData.recovered}',
-                              false, Colors.green),
-                          DataListItem('Deaths: ${locationData.deaths}', false,
-                              Colors.red),
-                        ],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () => locationData!.country == 'India'
+                          ? Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                transitionDuration: Duration(milliseconds: 500),
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        StatesInfoScreen(
+                                  stateVirusData: widget.statesData,
+                                ),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  return SharedAxisTransition(
+                                    child: child,
+                                    animation: animation,
+                                    secondaryAnimation: secondaryAnimation,
+                                    transitionType:
+                                        SharedAxisTransitionType.scaled,
+                                  );
+                                },
+                              ))
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            DataListItem('${locationData!.country}', true,
+                                Colors.deepOrangeAccent),
+                            DataListItem(
+                                'Confirmed: ${locationData!.confirmedCases}',
+                                false,
+                                Colors.amber),
+                            DataListItem(
+                                'Recovered: ${locationData!.recovered}',
+                                false,
+                                Colors.green),
+                            DataListItem('Deaths: ${locationData!.deaths}',
+                                false, Colors.red),
+                          ],
+                        ),
                       ),
                     ),
+                  ).translateOnHover,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Last updated: ${DateTime.now().toString().substring(0, 10)}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 7, color: Colors.greenAccent),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Last updated: ${DateTime.now().toString().substring(0, 10)}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 7, color: Colors.greenAccent),
-                ),
-              ),
-              SingleChildScrollView(
-                // scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.map),
-                          Text(' Live Maps'),
-                        ],
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MapsScreen(
-                            index: index,
-                          ),
-                        ),
-                      ),
-                    ),
-                    FlatButton(
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.refresh),
-                          Text(' Refresh Data'),
-                        ],
-                      ),
-                      onPressed: () => Navigator.pushReplacementNamed(
-                          context, LoadingScreen.routeName),
-                    ),
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Row(children: [
-                        Image.asset(
-                          'assets/images/world.png',
-                          height: 50,
-                          width: 50,
-                          color: !isLight ? Colors.white : Colors.black,
-                        ),
-                        Text(' All Countries'),
-                      ]),
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return CountriesInfoScreen(
-                          countryVirusData: widget.countriesData,
-                        );
-                      })),
-                    ),
-                    FlatButton(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/images/india.png',
-                            height: 50,
-                            width: 50,
-                            color: !isLight ? Colors.white : Colors.black,
-                          ),
-                          Text(' States of India'),
-                        ],
-                      ),
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return StatesInfoScreen(
-                          stateVirusData: widget.statesData,
-                        );
-                      })),
-                    ),
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    FlatButton(
-                      child: Row(children: [
-                        Icon(Icons.info_outline),
-                        Text(' About Sources'),
-                      ]),
-                      onPressed: () =>
-                          _scaffoldKey.currentState.showBottomSheet(
-                        (context) => InfoBottomSheet(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                      ),
-                    ),
-                    FlatButton(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.info),
-                          Text(' About COVID-19'),
-                        ],
-                      ),
-                      onPressed: () =>
-                          Navigator.pushNamed(context, InfoScreen.routeName),
-                    ),
-                  ],
-                ),
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FlatButton(
+                SizedBox(height: 30),
+                Container(
+                  height: 130,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          isLight
-                              ? Icon(Icons.wb_incandescent, color: Colors.black)
-                              : Icon(Icons.lightbulb_outline),
-                          Text(isLight ? ' Dark Theme' : ' Light Theme'),
-                        ]),
-                    onPressed: () => setState(
-                      () {
-                        if (isLight) {
-                          // brightness = Brightness.dark;
-                          isLight = !isLight;
-                          DynamicTheme.of(context)
-                              .setBrightness(Brightness.dark);
-                        } else if (!isLight) {
-                          isLight = !isLight;
-                          // brightness = Brightness.light;
-                          DynamicTheme.of(context)
-                              .setBrightness(Brightness.light);
-                        } else {
-                          isLight = DynamicThemeState().brightness ==
-                              Brightness.light;
-                          // brightness = Brightness.dark;
-                          DynamicTheme.of(context)
-                              .setBrightness(Brightness.dark);
-                        }
-                      },
-                    ),
-                  ),
-                  FlatButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Icon(Icons.show_chart),
-                        Text(' InfoGraphs'),
+                        buildCard(
+                            context: context,
+                            icon: Icons.show_chart,
+                            screen: ChartsScreen(
+                              countryName: locationData!.country!,
+                              cases: double.parse(
+                                  '${locationData!.confirmedCases}'),
+                              deaths: double.parse('${locationData!.deaths}'),
+                              recovered:
+                                  double.parse('${locationData!.recovered}'),
+                            ),
+                            title: 'InfoGraphs'),
+                        buildCard(
+                            context: context,
+                            screen: MapsScreen(index: index),
+                            onTap: kIsWeb
+                                ? () async {
+                                    final urlString =
+                                        'https://app.developer.here.com/coronavirus/';
+                                    if (await canLaunch(urlString))
+                                      launch(urlString);
+                                    else
+                                      print('can\'t launch this url');
+                                  }
+                                : null,
+                            icon: Icons.map,
+                            title: 'Live Maps'),
+                        buildCard(
+                            context: context,
+                            screen: CountriesInfoScreen(
+                                countryVirusData: widget.countriesData),
+                            img: 'assets/images/world.png',
+                            title: 'All Countries'),
+                        buildCard(
+                            context: context,
+                            screen: StatesInfoScreen(
+                                stateVirusData: widget.statesData),
+                            img: 'assets/images/india.png',
+                            title: 'States of India'),
+                        buildCard(
+                            context: context,
+                            icon: Icons.info_outline,
+                            onTap: () => _scaffoldKey.currentState!
+                                .showBottomSheet((context) => InfoBottomSheet(),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                    )),
+                            title: 'About Sources'),
                       ],
                     ),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChartsScreen(
-                          countryName: locationData.country,
-                          cases: double.parse('${locationData.confirmedCases}'),
-                          deaths: double.parse('${locationData.deaths}'),
-                          recovered: double.parse('${locationData.recovered}'),
-                        ),
-                      ),
+                  ),
+                ),
+                Container(
+                  height: 120,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        buildCard(
+                            context: context,
+                            screen: LoadingScreen(),
+                            icon: Icons.refresh,
+                            title: 'Refresh Data'),
+                        buildCard(
+                            context: context,
+                            icon: isLight
+                                ? Icons.wb_incandescent
+                                : Icons.lightbulb_outline,
+                            onTap: () => setState(
+                                  () {
+                                    if (isLight) {
+                                      isLight = !isLight;
+                                      EasyDynamicTheme.of(context)
+                                          .changeTheme(dark: true);
+                                    } else {
+                                      isLight = !isLight;
+                                      EasyDynamicTheme.of(context)
+                                          .changeTheme(dark: false);
+                                    }
+                                  },
+                                ),
+                            title: isLight ? ' Dark Theme' : ' Light Theme'),
+                      ],
                     ),
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      endDrawer: Drawer(child: options()),
+    );
+  }
+
+  Widget buildCard(
+      {required BuildContext context,
+      required String title,
+      Widget? screen,
+      IconData? icon,
+      dynamic onTap,
+      String? img}) {
+    return Card(
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap == null
+            ? () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => screen!),
+                )
+            : onTap,
+        child: Container(
+          width: 100,
+          height: 100,
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              icon != null
+                  ? Icon(
+                      icon,
+                      color: !isLight ? Colors.white : Colors.black,
+                    )
+                  : Image.asset(
+                      img!,
+                      height: 50,
+                      width: 50,
+                      color: !isLight ? Colors.white : Colors.black,
+                    ),
+              SizedBox(height: 5),
+              Text(
+                title,
+                textAlign: TextAlign.center,
               ),
-              // Expanded(child: buildList()),
             ],
           ),
         ),
       ),
-      endDrawer: Drawer(
-        child: options(),
-      ),
-    );
+    ).translateOnHover;
   }
 }
