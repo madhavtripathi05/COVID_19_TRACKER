@@ -34,7 +34,7 @@ A minimal App built using Flutter which shows live data about Corona Virus outbr
 
 <details>
   <summary><strong>Screenshots</strong></summary> 
-    <img src="assets/screenshots/IMG_2408.png" />
+    <img src="assets/screenshots/IMG_2408.PNG" />
     <img src="assets/screenshots/IMG_2410.PNG" />
     <img src="assets/screenshots/IMG_2409.PNG" />
     <img src="assets/screenshots/IMG_2411.PNG" />
